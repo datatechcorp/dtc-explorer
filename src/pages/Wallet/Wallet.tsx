@@ -52,10 +52,16 @@ class Screen extends React.Component<PropsFromRedux, any> {
                   <div className="account-info-sec d-flex align-items-center">
                     <span className="text-red">{walletAddress}</span>
                     <span className="ml-2">
-                      <CopyableText class="menu-copy" value="ali" />
+                      <CopyableText
+                        class="menu-copy ant-btn-link"
+                        value={walletAddress}
+                      />
                     </span>
                     <span onClick={this.showReceiveModal} className="ml-3">
-                      <QRCodeText class="menu-copy" icon="qrcode" />
+                      <QRCodeText
+                        class="menu-copy ant-btn-link"
+                        icon="qrcode"
+                      />
                     </span>
                   </div>
                 </div>

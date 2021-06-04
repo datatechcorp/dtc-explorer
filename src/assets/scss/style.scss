@@ -319,14 +319,14 @@ h4.ant-typography,
   }
 }
 .ant-btn-link {
-  font-size: 13px;
-  color: rgba(17, 51, 83, 0.3);
+  font-size: 16px;
+  color: #fff !important;
   font-weight: 500;
   &:hover,
   &.active,
   &:focus,
   &:active {
-    color: #045125 !important;
+    color: #d3d3d3 !important;
     font-weight: 600;
     border-color: transparent;
   }
@@ -779,6 +779,10 @@ a:hover,
     position: relative !important;
   }
 }
+.mr-2,
+.mx-2 {
+  margin-right: 0.5rem !important;
+}
 .text-violet {
   color: #716aca !important;
 }
@@ -787,6 +791,15 @@ a:hover,
 }
 .text-red {
   color: #45bf55 !important;
+}
+.text-success {
+  color: #45bf55 !important;
+}
+.text-error {
+  color: #bd0000 !important;
+}
+.text-upper {
+  text-transform: uppercase !important;
 }
 .layout-content {
   // margin-top: 10%;
@@ -930,15 +943,17 @@ a:hover,
           }
         }
       }
-      & .d-flex {
-        justify-content: space-between;
+      & .list-body-left {
+        flex: 2;
       }
       & .list-body-right {
+        flex: 1;
         display: flex;
         flex-direction: column;
         justify-content: space-between;
         & p {
           text-align: right;
+          color: #d3d3d3;
         }
       }
     }
@@ -972,7 +987,7 @@ a:hover,
   border-color: transparent !important;
   background-color: transparent !important;
   background-image: none !important;
-  color: #333 !important;
+  // color: #333 !important;
 }
 .menu-list {
   border: none;
@@ -3350,6 +3365,12 @@ right connector from last child*/
   &.w-250 {
     max-width: 250px;
   }
+  &.w-300 {
+    max-width: 300px;
+  }
+  &.w-125 {
+    max-width: 125px;
+  }
   &.w-180 {
     max-width: 180px;
   }
@@ -3688,6 +3709,7 @@ right connector from last child*/
     }
     .menu-copy {
       margin: 0 4px;
+      color: #45bf55 !important;
     }
   }
   .account-card {
@@ -3773,7 +3795,7 @@ right connector from last child*/
       }
     }
   }
-  .ant-progress-text{
+  .ant-progress-text {
     color: #fff;
   }
   & .btn-default {
@@ -3783,10 +3805,10 @@ right connector from last child*/
     font-size: 12px;
     cursor: pointer;
     & span {
-      color: #fff !important;
+      color: rgb(38, 38, 38) !important;
     }
     &:hover span {
-      color: #fff !important;
+      color: rgb(38, 38, 38) !important;
     }
   }
   & .operate {
@@ -3989,5 +4011,101 @@ right connector from last child*/
       text-align: center !important;
       // line-height: 1 !important;
     }
+  }
+}
+// page transaction
+.transaction-tabs {
+  color: lightgray;
+  border: none !important;
+  background-color: #313131;
+  position: relative;
+  box-shadow: #00000033 0px 15px 30px 0px;
+  // padding: 12px 24px;
+  border-radius: 0 0 20px 20px;
+  & .ant-tabs-bar {
+    border-bottom: 0;
+    // background-color: #F4F4F2;
+    background-color: rgba(248, 245, 240, 0.25);
+    & .ant-tabs-nav-container {
+      height: auto !important;
+    }
+    & .ant-tabs-tab {
+      text-align: center;
+      border-radius: 0 !important;
+      padding: 0 30px !important;
+      line-height: 56px !important;
+      height: 56px !important;
+      background: transparent !important;
+      box-sizing: border-box;
+      border: none !important;
+      border-top: 4px solid transparent !important;
+      font-size: 14px;
+      text-transform: uppercase;
+      font-weight: 500;
+      margin-right: 0 !important;
+      &-active,
+      &:hover {
+        border-color: #45bf55 !important;
+        background: #313131 !important;
+      }
+    }
+  }
+  & .ant-tabs-content {
+    padding: 12px 30px 24px;
+    color: #fff;
+  }
+}
+.sec-overview {
+  &-row {
+    border-bottom: 1px solid #f3f3f3;
+    &:last-child {
+      border-bottom: none;
+    }
+  }
+  .custom-tag {
+    position: relative;
+    transition: all 0.3s ease 0s;
+    background: transparent !important;
+    border: none;
+    z-index: 0;
+    padding: 0 12px 0 22px;
+    &:before,
+    &:after {
+      content: '';
+      width: 100%;
+      height: 100%;
+      background: #f3f3f3;
+      position: absolute;
+      top: 0;
+      right: 0;
+      z-index: -1;
+      -webkit-clip-path: polygon(10% 0, 100% 0, 100% 100%, 10% 100%, 0% 50%);
+      clip-path: polygon(10% 0, 100% 0, 100% 100%, 10% 100%, 0% 50%);
+    }
+  }
+  .item-belong {
+    background: url(../images/bg/enter.svg) no-repeat;
+    fill: white;
+    padding-left: 18px;
+    background-position: 4px 4px;
+    background-size: 9px 9px;
+    & a {
+      color: #fff;
+      width: 100%;
+      display: contents;
+      &:hover {
+        color: $primarycolor;
+      }
+    }
+  }
+  .tx-sr > div {
+    width: 7rem;
+    min-width: 7rem;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    max-width: 100%;
+    margin-right: 12px;
+    display: inline-block;
   }
 }

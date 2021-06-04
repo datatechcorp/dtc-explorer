@@ -12,6 +12,7 @@ import { UserState } from '../redux/user';
 import { routeName } from './route-name';
 import { Withdraw } from '../pages/Withdraw';
 import { CreateToken } from '../pages/Token';
+import { Transaction } from '../pages/Transaction';
 
 // const isAuthorized = (user: UserState): ValidateResult => {
 //   if (user._id) {
@@ -146,6 +147,12 @@ export const routes: RouteConfig[] = [
   {
     path: routeName.createToken,
     component: CreateToken,
+    layout: MainLayout,
+    validate: isConnected,
+  },
+  {
+    path: routeName.transaction,
+    component: Transaction,
     layout: MainLayout,
     validate: isConnected,
   },

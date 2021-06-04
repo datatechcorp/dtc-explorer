@@ -5,6 +5,8 @@ import { setting } from '../../../config/setting';
 import { sdk } from '../../../config/utils';
 import { RootState } from '../../../redux';
 import { txAction } from '../../../redux/transaction';
+import { Link } from 'react-router-dom';
+import { routeName } from '../../../config/route-name';
 
 const mapStateToProps = (state: RootState) => ({
   tickTx: state.transaction.tickTx,
@@ -59,41 +61,54 @@ class Screen extends React.Component<PropsFromRedux> {
                 <li className="list-group-item blocks-body" key={transactionId}>
                   <div className="d-flex">
                     <div className="list-body-left">
-                      <div className="text-red ellipsis_box w-250">
-                        {transactionId}
-                      </div>
+                      <Link
+                        to={routeName.transaction}
+                        className="text-red ellipsis_box w-300"
+                      >
+                        <div className="ellipsis_box_start">
+                          {transactionId}
+                        </div>
+                        <div className="ellipsis_box_end">
+                          {transactionId.slice(-5)}
+                        </div>
+                      </Link>
                       <div className="text-small">
                         Transaction type: Transfer {symbol}
                       </div>
 
-                      <div className="d-flex">
+                      <div className="d-flex justify-content-start">
                         <div className="text-small d-flex">
                           From:
-                          <div className="text-red ellipsis_box w-250">
-                            <div className="left">{fromAddress}</div>
-                            {(fromAddress || '').slice(-5)}
+                          <div className="text-red ellipsis_box w-125">
+                            <div className="ellipsis_box_start">
+                              {fromAddress}
+                            </div>
+                            <div className="ellipsis_box_end">
+                              {(fromAddress || '').slice(-5)}
+                            </div>
                           </div>
                         </div>
-                        <div className="text-small d-flex">
+                        <div className="ml-5 text-small d-flex">
                           To:
-                          <div className="text-red ellipsis_box w-250">
-                            <div className="left">{toAddress}</div>
-                            {(toAddress || '').slice(-5)}
+                          <div className="text-red ellipsis_box w-125">
+                            <div className="ellipsis_box_start">
+                              {toAddress}
+                            </div>
+                            <div className="ellipsis_box_end">
+                              {(toAddress || '').slice(-5)}
+                            </div>
                           </div>
                         </div>
                       </div>
-
-                      <div className="text-small">
-                        <p>
-                          {sdk.ins.fromSun(assetAmount)} {symbol}
-                        </p>
-                        <p className="time text-small">
-                          {Math.floor(
-                            Math.abs((Date.now() - timeStamp) / 1000),
-                          )}
-                          secs ago
-                        </p>
-                      </div>
+                    </div>
+                    <div className="list-body-right">
+                      <p>
+                        {sdk.ins.fromSun(assetAmount)} {symbol}
+                      </p>
+                      <p className="time text-small">
+                        {Math.floor(Math.abs((Date.now() - timeStamp) / 1000))}
+                        secs ago
+                      </p>
                     </div>
                   </div>
                 </li>

@@ -20,6 +20,7 @@ export const routeName = {
   scanQR: '/scan-qr',
   franchise: '/franchise',
   createToken: '/create-token',
+  transaction: '/transaction',
 
   home: '/',
   products: '/products',
