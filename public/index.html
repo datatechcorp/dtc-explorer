@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" type="image/png" href="%PUBLIC_URL%/favicon.png" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, maximum-scale=1,user-scalable=0"
+    />
+    <meta name="theme-color" content="#000000" />
+    <meta name="description" content="DTCScan" />
+    <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
+
+    <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
+
+    <title>DTCScan</title>
+
+    <script src="%PUBLIC_URL%/google-translate-api.js"></script>
+    <script src="%PUBLIC_URL%/google-translate.js"></script>
+  </head>
+
+  <body>
+    <noscript>You need to enable JavaScript to run this app.</noscript>
+    <div id="root"></div>
+    <!-- <div id="google_translate_element"></div> -->
+    <!-- google translate -->
+
+    <script type="text/javascript">
+      function GoogleLanguageTranslatorInit() {
+        new google.translate.TranslateElement(
+          { pageLanguage: 'en', autoDisplay: false },
+          'root',
+        );
+      }
+    </script>
+
+    <script
+      type="text/javascript"
+      src="https://translate.google.com/translate_a/element.js?cb=GoogleLanguageTranslatorInit"
+    ></script>
+  </body>
+</html>
