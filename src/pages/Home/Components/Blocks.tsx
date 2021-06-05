@@ -5,6 +5,7 @@ import iconBlock from '../../../assets/images/icons/block.svg';
 import { Block, blockAction } from '../../../redux/block';
 import TickBlockItem from './TickBlockItem';
 import { setting } from '../../../config/setting';
+import { Skeleton } from 'antd';
 
 const mapStateToProps = (state: RootState) => ({
   tickBlock: state.block.tickBlock,
@@ -48,20 +49,26 @@ class Screen extends React.Component<PropsFromRedux> {
             <span>More</span> &gt;
           </a>
         </div>
-        <div className="scrollbar-container">
-          <ul className="list-group list-group-flush">
-            {(data || []).map((block: Block) => {
-              return (
-                <li
-                  className="list-group-item blocks-body"
-                  key={block.blockHash}
-                >
-                  <TickBlockItem data={block} />
-                </li>
-              );
-            })}
-          </ul>
-        </div>
+        {data.length === 0 ? (
+          <div className="card-body">
+            <Skeleton active />
+          </div>
+        ) : (
+          <div className="scrollbar-container">
+            <ul className="list-group list-group-flush">
+              {(data || []).map((block: Block) => {
+                return (
+                  <li
+                    className="list-group-item blocks-body"
+                    key={block.blockHash}
+                  >
+                    <TickBlockItem data={block} />
+                  </li>
+                );
+              })}
+            </ul>
+          </div>
+        )}
       </div>
     );
   }

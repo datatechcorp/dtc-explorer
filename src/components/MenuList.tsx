@@ -70,7 +70,7 @@ class MenuListClass extends React.Component<
       <>
         <Menu
           className="menu-list"
-          mode={isMobile ? 'inline' : 'horizontal'}
+          mode={isMobile ? 'vertical' : 'horizontal'}
           selectedKeys={[this.state.current]}
         >
           <Menu.Item key={routeName.home}>

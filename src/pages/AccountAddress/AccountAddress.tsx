@@ -1,9 +1,10 @@
-import { Col, Row, Tabs, Typography } from 'antd';
+import { Tabs, Typography, Row, Col } from 'antd';
 import React from 'react';
 import { connect, ConnectedProps } from 'react-redux';
 import { RootState } from '../../redux';
 import { userAction } from '../../redux/user';
-import { Overview } from './Components/Overview';
+import { Address } from './Components/Address';
+import { Transactions } from './Components/Transactions';
 
 const { Title } = Typography;
 const { TabPane } = Tabs;
@@ -23,32 +24,26 @@ class Screen extends React.Component<PropsFromRedux, any> {
   render(): JSX.Element {
     return (
       <>
-        <div className="sec-transaction">
+        <div className="sec-accountAddress">
           <div className="container">
             <Row gutter={[8, 16]}>
               <Col span={24}>
                 <Title className="text-red" level={2}>
-                  Transaction Details
+                  Account
                 </Title>
+                <Col span={24}>
+                  <Address />
+                </Col>
               </Col>
             </Row>
             <Row gutter={[8, 16]}>
               <Col span={24}>
-                <Tabs
-                  onChange={this.onChange}
-                  type="card"
-                  className="transaction-tabs"
-                >
-                  <TabPane tab="Overview" key="1">
-                    <Overview />
-                  </TabPane>
-                  {/* <TabPane tab="Internal txns(2)" key="2">
-                    Content of Tab Pane 2
-                  </TabPane>
-                  <TabPane tab="Event logs(1)" key="3">
-                    Content of Tab Pane 3
-                  </TabPane> */}
-                </Tabs>
+                <Title className="text-red" level={2}>
+                  Transactions
+                </Title>
+              </Col>
+              <Col span={24}>
+                <Transactions />
               </Col>
             </Row>
           </div>
@@ -58,4 +53,4 @@ class Screen extends React.Component<PropsFromRedux, any> {
   }
 }
 
-export const Transaction = connector(Screen);
+export const AccountAddress = connector(Screen);

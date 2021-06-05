@@ -438,7 +438,7 @@ a:hover,
     color: #333 !important;
   }
   &.notiBadge {
-    color: #000 !important;
+    color: #fff !important;
     padding: 0 12px;
     height: 38px;
     cursor: pointer;
@@ -789,6 +789,12 @@ a:hover,
 .text-sky {
   color: #34bfa3 !important;
 }
+.text-white {
+  color: #fff !important;
+}
+.text-dark {
+  color: #333 !important;
+}
 .text-red {
   color: #45bf55 !important;
 }
@@ -797,6 +803,9 @@ a:hover,
 }
 .text-error {
   color: #bd0000 !important;
+}
+.text-warning {
+  color: $yellow !important;
 }
 .text-upper {
   text-transform: uppercase !important;
@@ -808,6 +817,15 @@ a:hover,
   padding-top: 120px;
   overflow: hidden;
   background-color: #202020;
+  @include mobile{
+    padding-top: 24px;
+  }
+  @include tablet{
+    padding-top: 54px;
+  }
+  @include desktop{
+    padding-top: 54px;
+  }
   &:before {
     background-image: url(../images/bg/chart-lineshape-2.png);
     position: absolute;
@@ -3702,10 +3720,19 @@ right connector from last child*/
     border-radius: 0 0 20px 20px !important;
     margin-bottom: 10px;
     border-top: 4px solid #45bf55;
+    @include mobile {
+      padding: 6px 12px;
+    }
     &-sec {
       min-height: 21px;
       line-height: 21px;
       padding: 0 20px;
+      & > span {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        max-width: 100%;
+      }
     }
     .menu-copy {
       margin: 0 4px;
@@ -3786,7 +3813,7 @@ right connector from last child*/
       display: flex;
       & span {
         &:first-child {
-          opacity: 0.2;
+          opacity: 0.7;
           line-height: 20px;
         }
         &:last-child {
@@ -4022,6 +4049,7 @@ right connector from last child*/
   box-shadow: #00000033 0px 15px 30px 0px;
   // padding: 12px 24px;
   border-radius: 0 0 20px 20px;
+  margin-bottom: 54px;
   & .ant-tabs-bar {
     border-bottom: 0;
     // background-color: #F4F4F2;
@@ -4056,6 +4084,15 @@ right connector from last child*/
   }
 }
 .sec-overview {
+  &.border-right {
+    padding: 0 12px 0 0;
+    border-right: 1px solid #f3f3f3;
+    @include mobile {
+      padding: 0;
+      border-right: none;
+      border-bottom: 1px solid #f3f3f3;
+    }
+  }
   &-row {
     border-bottom: 1px solid #f3f3f3;
     &:last-child {

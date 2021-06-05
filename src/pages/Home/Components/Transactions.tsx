@@ -7,6 +7,7 @@ import { RootState } from '../../../redux';
 import { txAction } from '../../../redux/transaction';
 import { Link } from 'react-router-dom';
 import { routeName } from '../../../config/route-name';
+import { Skeleton } from 'antd';
 
 const mapStateToProps = (state: RootState) => ({
   tickTx: state.transaction.tickTx,
@@ -45,77 +46,88 @@ class Screen extends React.Component<PropsFromRedux> {
             <span>More</span> &gt;
           </a>
         </div>
-        <div className="scrollbar-container">
-          <ul className="list-group list-group-flush">
-            {(data || []).map((tx) => {
-              const {
-                transactionId,
-                fromAddress,
-                toAddress,
-                assetName,
-                assetAmount,
-                timeStamp,
-              } = tx;
-              const symbol = setting.symbol;
-              return (
-                <li className="list-group-item blocks-body" key={transactionId}>
-                  <div className="d-flex">
-                    <div className="list-body-left">
-                      <Link
-                        to={routeName.transaction}
-                        className="text-red ellipsis_box w-300"
-                      >
-                        <div className="ellipsis_box_start">
-                          {transactionId}
+        {data.length === 0 ? (
+          <div className="card-body">
+            <Skeleton active />
+          </div>
+        ) : (
+          <div className="scrollbar-container">
+            <ul className="list-group list-group-flush">
+              {(data || []).map((tx) => {
+                const {
+                  transactionId,
+                  fromAddress,
+                  toAddress,
+                  assetName,
+                  assetAmount,
+                  timeStamp,
+                } = tx;
+                const symbol = setting.symbol;
+                return (
+                  <li
+                    className="list-group-item blocks-body"
+                    key={transactionId}
+                  >
+                    <div className="d-flex">
+                      <div className="list-body-left">
+                        <Link
+                          to={routeName.transaction}
+                          className="text-red ellipsis_box w-300"
+                        >
+                          <div className="ellipsis_box_start">
+                            {transactionId}
+                          </div>
+                          <div className="ellipsis_box_end">
+                            {transactionId.slice(-5)}
+                          </div>
+                        </Link>
+                        <div className="text-small">
+                          Transaction type: Transfer {symbol}
                         </div>
-                        <div className="ellipsis_box_end">
-                          {transactionId.slice(-5)}
-                        </div>
-                      </Link>
-                      <div className="text-small">
-                        Transaction type: Transfer {symbol}
-                      </div>
 
-                      <div className="d-flex justify-content-start">
-                        <div className="text-small d-flex">
-                          From:
-                          <div className="text-red ellipsis_box w-125">
-                            <div className="ellipsis_box_start">
-                              {fromAddress}
-                            </div>
-                            <div className="ellipsis_box_end">
-                              {(fromAddress || '').slice(-5)}
+                        <div className="d-flex justify-content-start">
+                          <div className="text-small d-flex">
+                            From:
+                            <div className="text-red ellipsis_box w-125">
+                              <div className="ellipsis_box_start">
+                                {fromAddress}
+                              </div>
+                              <div className="ellipsis_box_end">
+                                {(fromAddress || '').slice(-5)}
+                              </div>
                             </div>
                           </div>
-                        </div>
-                        <div className="ml-5 text-small d-flex">
-                          To:
-                          <div className="text-red ellipsis_box w-125">
-                            <div className="ellipsis_box_start">
-                              {toAddress}
-                            </div>
-                            <div className="ellipsis_box_end">
-                              {(toAddress || '').slice(-5)}
+                          <div className="ml-5 text-small d-flex">
+                            To:
+                            <div className="text-red ellipsis_box w-125">
+                              <div className="ellipsis_box_start">
+                                {toAddress}
+                              </div>
+                              <div className="ellipsis_box_end">
+                                {(toAddress || '').slice(-5)}
+                              </div>
                             </div>
                           </div>
                         </div>
                       </div>
+                      <div className="list-body-right">
+                        <p>
+                          {sdk.ins.fromSun(assetAmount)} {symbol}
+                        </p>
+                        <p className="time text-small">
+                          {Math.floor(
+                            Math.abs((Date.now() - timeStamp) / 1000),
+                          )}
+                          secs ago
+                        </p>
+                      </div>
                     </div>
-                    <div className="list-body-right">
-                      <p>
-                        {sdk.ins.fromSun(assetAmount)} {symbol}
-                      </p>
-                      <p className="time text-small">
-                        {Math.floor(Math.abs((Date.now() - timeStamp) / 1000))}
-                        secs ago
-                      </p>
-                    </div>
-                  </div>
-                </li>
-              );
-            })}
-          </ul>
-        </div>
+                  </li>
+                );
+              })}
+            </ul>
+          </div>
+        )}
       </div>
     );
   }

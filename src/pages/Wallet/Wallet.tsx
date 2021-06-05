@@ -59,6 +59,7 @@ class Screen extends React.Component<PropsFromRedux, any> {
                     </span>
                     <span onClick={this.showReceiveModal} className="ml-3">
                       <QRCodeText
+                        address={walletAddress}
                         class="menu-copy ant-btn-link"
                         icon="qrcode"
                       />

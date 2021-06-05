@@ -111,6 +111,7 @@ class Component extends React.Component<ReduxProps, any> {
                 type="link"
                 size="small"
                 style={{ borderColor: 'transparent' }}
+                className="text-dark"
                 onClick={(e) => {
                   let max = balance;
                   if (token !== 'trx') {

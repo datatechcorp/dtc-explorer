@@ -50,20 +50,18 @@ class Screen extends React.Component<PropsFromRedux> {
   formatTime = (number) => {
     return utils.convertTimeToString(number, 'DD-MM-YYYY hh:mm');
   };
-  pad = (val) => {
-    const valString = val + '';
-    if (valString.length < 2) {
-      return '0' + valString;
-    } else {
-      return valString;
+  formatSecond = (time) => {
+    // Hours, minutes and seconds
+    const hrs = ~~(time / 3600);
+    const mins = ~~((time % 3600) / 60);
+    const secs = ~~time % 60;
+    let ret = '';
+    if (hrs > 0) {
+      ret += '' + hrs + 'hrs ' + (mins < 10 ? '0' : '');
     }
-  };
-  formatSecond = (number) => {
-    const totalSeconds = Math.floor(Math.abs((Date.now() - number) / 1000));
-    this.setState({
-      seconds: this.pad(totalSeconds % 60),
-      minutes: this.pad(totalSeconds / 60),
-    });
+    ret += '' + mins + 'mins ' + (secs < 10 ? '0' : '');
+    ret += '' + secs;
+    return ret;
   };
   render(): JSX.Element {
     const {
@@ -206,8 +204,10 @@ class Screen extends React.Component<PropsFromRedux> {
                 <BiTime />
               </span>
               <span>
-                {Math.floor(Math.abs((Date.now() - 1622794131000) / 1000))} secs
-                ago | {this.formatTime(1622794131000)} (Local)
+                {this.formatSecond(
+                  Math.floor(Math.abs((Date.now() - 1622794131000) / 1000)),
+                )}
+                secs ago | {this.formatTime(1622794131000)} (Local)
               </span>
             </span>
           </Col>
@@ -231,7 +231,9 @@ class Screen extends React.Component<PropsFromRedux> {
             </span>
           </Col>
           <Col span={20}>
-            <span className="text-red">{walletAddress}</span>
+            <Link to={routeName.accountAddress} className="text-red">
+              <span>{walletAddress}</span>
+            </Link>
             <CopyableText
               class="menu-copy ant-btn-link"
               value={walletAddress}
@@ -251,7 +253,9 @@ class Screen extends React.Component<PropsFromRedux> {
           </Col>
           <Col span={20}>
             <img src={contract} alt="img" />
-            <span className="mr-5 text-red">{walletAddress}</span>
+            <Link to={routeName.accountAddress} className="mr-5 text-red">
+              <span>{walletAddress}</span>
+            </Link>
             <CopyableText
               class="menu-copy ant-btn-link"
               value={walletAddress}
@@ -308,13 +312,13 @@ class Screen extends React.Component<PropsFromRedux> {
           <Col span={20}>
             <div>13,596 Energy</div>
             <div className="item-belong tx-sr ml-1">
-              Energy usage from user's frozen energy: 0 Energy
+              Energy usage from users frozen energy: 0 Energy
             </div>
             <div className="item-belong tx-sr ml-1">
               Burn 1.90344 TRX for energy: 13,596 Energy
             </div>
             <div className="item-belong tx-sr ml-1">
-              Consume contract owner's Energy: 0 Energy
+              Consume contract owners Energy: 0 Energy
             </div>
           </Col>
         </Row>

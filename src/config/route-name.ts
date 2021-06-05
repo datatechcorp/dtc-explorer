@@ -21,6 +21,7 @@ export const routeName = {
   franchise: '/franchise',
   createToken: '/create-token',
   transaction: '/transaction',
+  accountAddress: '/account-address',
 
   home: '/',
   products: '/products',
