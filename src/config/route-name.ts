@@ -22,6 +22,7 @@ export const routeName = {
   createToken: '/create-token',
   transaction: '/transaction',
   accountAddress: '/account-address',
+  tokenRecord: '/token-record',
 
   home: '/',
   products: '/products',

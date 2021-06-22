@@ -88,6 +88,11 @@ class MenuListClass extends React.Component<
               <span>Create Token</span>
             </Link>
           </Menu.Item>
+          <Menu.Item key={routeName.tokenRecord}>
+            <Link to={routeName.tokenRecord}>
+              <span>Token Record</span>
+            </Link>
+          </Menu.Item>
           {/* {category.tree.map((item) => (
             <SubMenu
               key={item._id}

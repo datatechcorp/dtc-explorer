@@ -14,6 +14,7 @@ import { Withdraw } from '../pages/Withdraw';
 import { CreateToken } from '../pages/Token';
 import { Transaction } from '../pages/Transaction';
 import { AccountAddress } from '../pages/AccountAddress';
+import { TokenRecord } from '../pages/TokenRecord';
 
 // const isAuthorized = (user: UserState): ValidateResult => {
 //   if (user._id) {
@@ -148,6 +149,12 @@ export const routes: RouteConfig[] = [
   {
     path: routeName.createToken,
     component: CreateToken,
+    layout: MainLayout,
+    validate: isConnected,
+  },
+  {
+    path: routeName.tokenRecord,
+    component: TokenRecord,
     layout: MainLayout,
     validate: isConnected,
   },

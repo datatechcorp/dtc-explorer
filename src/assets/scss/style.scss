@@ -817,13 +817,13 @@ a:hover,
   padding-top: 120px;
   overflow: hidden;
   background-color: #202020;
-  @include mobile{
+  @include mobile {
     padding-top: 24px;
   }
-  @include tablet{
+  @include tablet {
     padding-top: 54px;
   }
-  @include desktop{
+  @include desktop {
     padding-top: 54px;
   }
   &:before {
@@ -4144,5 +4144,151 @@ right connector from last child*/
     max-width: 100%;
     margin-right: 12px;
     display: inline-block;
+  }
+}
+// token record
+.tokenRecord {
+  margin: 54px 0;
+  .steps-content {
+    margin: 24px 0;
+  }
+
+  .steps-action {
+    margin-top: 24px;
+  }
+  & .ant-steps-item {
+    background: #fff;
+    color: #333;
+    border-radius: 12px;
+    padding: 8px 12px;
+    &-active {
+      background: #333;
+      color: #fff;
+      & .ant-steps-item-title {
+        color: #fff !important;
+      }
+      & .ant-steps-item-icon {
+        background: $primarylightcolor;
+        border-color: $primarylightcolor;
+        & .ant-steps-icon {
+          color: #fff !important;
+        }
+      }
+    }
+    & .ant-steps-item-title {
+      color: #333;
+    }
+    & .ant-steps-item-icon {
+      border-color: $primarylightcolor;
+      & .ant-steps-icon {
+        color: $primarylightcolor;
+      }
+    }
+  }
+  .ant-steps-item-finish
+    > .ant-steps-item-container
+    > .ant-steps-item-content
+    > .ant-steps-item-title::after {
+    background-color: $primarylightcolor;
+  }
+}
+// token type
+.serviceBox {
+  color: #fff;
+  text-align: center;
+  padding: 25px 25px 55px;
+  position: relative;
+  z-index: 1;
+  cursor: pointer;
+  &.active {
+    &::after {
+      background: mix(#fff, #007385, 82%);
+    }
+  }
+  &::before,
+  &::after {
+    content: '';
+    background: linear-gradient(#00a28d, #007385);
+    border-radius: 20px;
+    position: absolute;
+    left: 10px;
+    right: 0;
+    top: 15px;
+    bottom: 0;
+    z-index: -1;
+  }
+  &:after {
+    background: #fff;
+    left: 0;
+    right: 10px;
+    top: 0;
+    bottom: 15px;
+    clip-path: polygon(30% 0, 100% 0, 100% 85%, 75% 100%, 0 100%, 0 20%);
+  }
+  & .title {
+    // color: #007385;
+    color: mix(#fff, #007385, 85%);
+    font-size: 72px;
+    font-weight: 900;
+    text-shadow: -0.0075em 0.0075em 0 mix(#fff, #007385, 94%),
+      0.005em 0.005em 0 mix(#fff, #007385, 60%),
+      0.01em 0.01em 0 mix(#fff, #007385, 62%),
+      0.015em 0.015em mix(#fff, #007385, 64%),
+      0.02em 0.02em 0 mix(#fff, #007385, 66%),
+      0.025em 0.025em 0 mix(#fff, #007385, 68%),
+      0.03em 0.03em 0 mix(#fff, #007385, 70%),
+      0.035em 0.035em 0 mix(#fff, #007385, 72%);
+  }
+  & .description {
+    color: #888;
+    font-size: 13px;
+    line-height: 20px;
+    letter-spacing: 0.5px;
+    margin: 0;
+  }
+  & .read-more {
+    color: #fff;
+    font-size: 22px;
+    line-height: 22px;
+    position: absolute;
+    right: 15px;
+    bottom: 9px;
+    transition: all 0.3s ease 0s;
+    &:hover {
+      color: rgba(255, 255, 255, 0.7);
+      text-shadow: 3px 3px rgba(255, 255, 255, 0.1);
+    }
+  }
+}
+// confirm information
+.confirmInformation {
+  background: #eef0f2;
+  border-top: 3px solid $primarylightcolor;
+  padding: 30px 38px;
+  transition: all 340ms ease 0s;
+  & .title {
+    font-size: 15px;
+    font-weight: 900;
+    color: #000;
+    line-height: 26px;
+    text-transform: uppercase;
+    border-bottom: 3px solid rgba(139, 144, 157, 0.18);
+    padding: 0 0 8px;
+    margin: 0 0 18px;
+    transition: all 300ms linear 0ms;
+  }
+  & .titlecontent {
+    font-size: 16px;
+    font-weight: 700;
+  }
+  & .subcontent {
+    display: block;
+    font-size: 14px;
+    font-weight: 500;
+    color: #9ea2a8;
+    padding: 0 0 6px;
+    margin-bottom: 12px;
+    border-bottom: 3px solid rgba(139, 144, 157, 0.18);
+    transition: all 300ms linear 0ms;
   }
 }

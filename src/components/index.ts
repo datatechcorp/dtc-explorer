@@ -16,3 +16,5 @@ export * from './AssetCard';
 export * from './ObtainCard';
 export * from './VoteCard';
 export * from './MenuList';
+export * from './CardToken';
+export * from './TokenType';
