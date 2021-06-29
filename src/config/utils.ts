@@ -1,4 +1,6 @@
 import Sdk from 'dtc-node-sdk';
+import _ from 'lodash';
+import { Action, ErrorResponse } from '../redux/common';
 import { useEffect, useRef } from 'react';
 import { setting } from './setting';
 
@@ -25,6 +27,27 @@ const sdk = {
   },
 };
 
+function errorStack(
+  prefix: string,
+  dispatch,
+  changeFields: (payload: Record<string, any>) => Action,
+) {
+  const errors: Record<string, string> = {};
+  return {
+    pushError(fieldname: string, error: string) {
+      errors[`${prefix}.${fieldname}Err`] = error;
+    },
+    hasErrors() {
+      if (!_.isEmpty(errors)) {
+        dispatch(changeFields({ ...errors, hasErrors: true }));
+        return true;
+      }
+      dispatch(changeFields({ hasErrors: false }));
+      return false;
+    },
+  };
+}
+
 function usePrevious<V>(value: V) {
   const ref = useRef<V>();
   useEffect(() => {
@@ -45,4 +68,11 @@ function removeSpace(str: string) {
   return str.replace(/\s+/g, '');
 }
 
-export { sdk, usePrevious, delay, removeSpace };
+function isErrResponse(object: unknown): object is ErrorResponse {
+  return (
+    Object.prototype.hasOwnProperty.call(object, 'code') &&
+    Object.prototype.hasOwnProperty.call(object, 'message')
+  );
+}
+
+export { sdk, usePrevious, delay, removeSpace, errorStack, isErrResponse };

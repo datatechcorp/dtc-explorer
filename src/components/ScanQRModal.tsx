@@ -55,7 +55,7 @@ export class ScanQrModal extends React.Component<PropsType, any> {
 
         {!this.state.hasCamera && (
           <div className="mt-15">
-            <b style={{ color: 'red' }}>Can't access camera!</b>
+            <b style={{ color: 'red' }}>{`Can't access camera!`}</b>
             <ul style={{ textAlign: 'left' }}>
               <li>
                 If you are using Iphone or Ipad, please browser DataTechCorp via{' '}

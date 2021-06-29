@@ -12,25 +12,19 @@ import _ from 'lodash';
 type PropsType = {
   showCoinTypes?: CoinType[];
 };
-const mapStateToProps = (state: any): any => ({
+const mapStateToProps = (state: RootState) => ({
   user: state.user,
   wallet: state.wallet,
-  setting: state.setting,
 });
 const mapDispatchToProps = {
   changeFields: walletAction.changeFields,
   getMyTransactions: walletAction.getMyTransactions,
-  // getDepositAddresses: walletAction.getDepositAddresses,
 };
 
-const connector = connect<
-  ReturnType<typeof mapStateToProps>,
-  typeof mapDispatchToProps,
-  PropsType
->(mapStateToProps, mapDispatchToProps);
+const connector = connect(mapStateToProps, mapDispatchToProps);
 type PropsFromRedux = ConnectedProps<typeof connector>;
 
-class Screen extends React.Component<PropsFromRedux> {
+class Screen extends React.Component<PropsFromRedux & PropsType> {
   columns = [
     {
       title: 'Hash',

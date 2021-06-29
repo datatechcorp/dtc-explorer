@@ -25,7 +25,7 @@ export class TokenType extends React.Component<PropsType, any> {
     const props = this.props;
     return (
       <div
-        onClick={this.toggleClass}
+        // onClick={this.toggleClass}
         className={`serviceBox ${this.state.active ? 'active' : ''}`}
         style={{
           ...props.cardStyle,
@@ -47,9 +47,9 @@ export class TokenType extends React.Component<PropsType, any> {
         >
           {props.children}
         </p>
-        <a href="#" className="read-more">
+        <div className="read-more">
           <FaArrowCircleRight />
-        </a>
+        </div>
       </div>
     );
   }

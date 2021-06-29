@@ -2,11 +2,10 @@ import { Col, Row } from 'antd';
 import React from 'react';
 import { connect, ConnectedProps } from 'react-redux';
 import { setting } from '../../../config/setting';
-import { RootState } from '../../../redux';
 import utils from '../../../utils/utils';
 import FlipNumbers from 'react-flip-numbers';
 
-const mapStateToProps = (state: RootState): any => ({});
+const mapStateToProps = (): any => ({});
 const mapDispatchToProps = {};
 
 const connector = connect(mapStateToProps, mapDispatchToProps);

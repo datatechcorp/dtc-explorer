@@ -68,6 +68,7 @@ export interface TxState {
   mine: Tx[];
   fetching: boolean;
   issueTokenForm: IssueTokenForm;
+  recordContrForm: RecordContrForm;
 }
 
 export interface TxsResponse {
@@ -97,7 +98,7 @@ interface ContractItem {
   };
 }
 
-export interface Brc10DeployedTxResponse {
+export interface Drc10DeployedTxResponse {
   result: boolean;
   txid: string;
   transaction: {
@@ -109,4 +110,56 @@ export interface Brc10DeployedTxResponse {
       timestamp: number;
     };
   };
+}
+
+export interface SmLinks {
+  platforms: string[];
+  entries: Record<string, string[]>;
+}
+
+export interface RecordContrBase {
+  contrType: string;
+  contrAddress: string;
+}
+
+export interface RecordContrParams {
+  tknDescriptions: string;
+  tknLogo: string;
+  oflWebsite: string;
+  email: string;
+}
+
+export interface RecordContrOptional {
+  github: string;
+  whitepaper: string;
+  links: SmLinks;
+}
+
+export interface RecordContrForm
+  extends RecordContrBase,
+    RecordContrParams,
+    RecordContrOptional {
+  contrAddressErr: string;
+  tknDescriptionsErr: string;
+  tknLogoErr: string;
+  oflWebsiteErr: string;
+  emailErr: string;
+  signature: string;
+  hasErrors: boolean;
+  isDone: boolean;
+}
+
+export interface RecordContrRequest
+  extends RecordContrBase,
+    RecordContrParams,
+    Partial<RecordContrOptional> {
+  signature: string;
+}
+
+export interface RecordContr
+  extends RecordContrBase,
+    RecordContrParams,
+    RecordContrOptional {
+  id: string;
+  createdAt: string;
 }

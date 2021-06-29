@@ -7,7 +7,7 @@ import { routeName } from '../../config/route-name';
 import { RootState } from '../../redux';
 import { LoadableButton } from '../../components';
 
-const mapStateToProps = (state: RootState): any => ({
+const mapStateToProps = (state: RootState) => ({
   auth: state.auth,
   user: state.user,
 });

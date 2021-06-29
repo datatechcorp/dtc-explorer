@@ -10,7 +10,6 @@ import { Wallet } from '../pages/Wallet';
 import { Register } from '../pages/Register';
 import { UserState } from '../redux/user';
 import { routeName } from './route-name';
-import { Withdraw } from '../pages/Withdraw';
 import { CreateToken } from '../pages/Token';
 import { Transaction } from '../pages/Transaction';
 import { AccountAddress } from '../pages/AccountAddress';
@@ -137,12 +136,6 @@ export const routes: RouteConfig[] = [
   {
     path: routeName.wallet,
     component: Wallet,
-    layout: MainLayout,
-    validate: isConnected,
-  },
-  {
-    path: routeName.withdraw,
-    component: Withdraw,
     layout: MainLayout,
     validate: isConnected,
   },

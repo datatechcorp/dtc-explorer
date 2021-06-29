@@ -13,16 +13,16 @@ export interface LoginResponse extends UserInfo {
   access_token: string;
 }
 
-function login(data: LoginDto): Promise<BaseResponse<LoginResponse> | null> {
+function login(data: LoginDto) {
   const api = '/auth/login';
-  return commonApi.fetchData<LoginResponse>(api, 'post', data);
+  return commonApi.fetchData<BaseResponse<LoginResponse>>(api, 'post', data);
 }
 
-function loginFromAdmin(
-  userId: string,
-): Promise<BaseResponse<LoginResponse> | null> {
+function loginFromAdmin(userId: string) {
   const api = '/auth/admin/login-for-user';
-  return commonApi.fetchData<LoginResponse>(api, 'post', { _id: userId });
+  return commonApi.fetchData<BaseResponse<LoginResponse>>(api, 'post', {
+    _id: userId,
+  });
 }
 
 function verifyAccount(
@@ -46,9 +46,7 @@ function forgotPassword(
   return commonApi.fetchData<any>(api, 'post', data);
 }
 
-function resetPassword(
-  data: ResetPasswordDto,
-): Promise<BaseResponse<any> | null> {
+function resetPassword(data: ResetPasswordDto) {
   const api = '/auth/reset-password';
 
   const body = { ...data };

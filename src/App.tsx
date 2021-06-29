@@ -6,12 +6,10 @@ import { configureStore } from './config/store';
 import { reducer, RootState } from './redux';
 import { ConnectedRouter } from 'connected-react-router';
 import axios from 'axios';
-import { setting } from './config/setting';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { storage } from './utils/storage';
-import { userAction, DeviceStatus } from './redux/user';
-import { settingAction } from './redux/setting';
+import { userAction } from './redux/user';
 import queryParse from 'query-string';
 import { routeName } from './config/route-name';
 import { authAction } from './redux/auth';
@@ -19,19 +17,15 @@ import { notification } from './utils/notification';
 import { AuthRoute } from './components/AuthRoute';
 import { Switch, Redirect } from 'react-router-dom';
 import { firebaseUtils } from './utils/firebase';
-import { notificationAction } from './redux/notification';
-import { currencyFormatter } from './utils/currency-formatter';
-import { walletAction } from './redux/wallet';
+import { setting } from './config/setting';
 
 firebaseUtils.init();
 
-axios.defaults.baseURL = setting.backendHost;
-// axios.defaults.headers.common['Access-Control-Allow-Origin'] = '*';
-// axios.defaults.headers.common['crossdomain'] = true;
+axios.defaults.baseURL = setting.eventHost;
+axios.defaults.headers.common['Access-Control-Allow-Origin'] = '*';
+axios.defaults.headers.common['crossdomain'] = true;
 
 const store = configureStore(reducer);
-
-// store.dispatch(settingAction.getConfigs());
 
 const fromAdminRegex = /\?user_id=.*&token=.*/g;
 if (
@@ -51,66 +45,7 @@ if (
   if (key) {
     store.dispatch(userAction.getInfoFromConnectKey(key));
   }
-  // const oldData = storage.loadUser();
-  // if (oldData) {
-  //   axios.defaults.headers.common[
-  //     'Authorization'
-  //   ] = `Bearer ${oldData.access_token}`;
-  //   store.dispatch(
-  //     userAction.changeFields({
-  //       _id: oldData.user._id,
-  //       info: oldData.user,
-  //       access_token: oldData.access_token,
-  //     }),
-  //   );
-  //   store.dispatch(userAction.getMyInfo());
-  //   store.dispatch(walletAction.getAllCoins());
-  //   store.dispatch(walletAction.getMyWallets());
-  //   firebaseUtils.getNotificationToken().then((token) => {
-  //     if (token) {
-  //       store.dispatch(
-  //         userAction.addOrUpdateDevice(token, DeviceStatus.Active),
-  //       );
-  //     }
-  //   });
-  // }
 }
-
-//if old country existed, must dispatch immediately to fix bug first load product without country
-const oldCountry = storage.loadCountry();
-if (oldCountry) {
-  if (oldCountry.currency_code) {
-    currencyFormatter.setCurrency(oldCountry.currency_code);
-  }
-  store.dispatch(
-    settingAction.changeFields({
-      country: oldCountry,
-    }),
-  );
-}
-// addressAction
-// .getCountries()(store.dispatch)
-// .then((success) => {
-//   if (success) {
-//     const oldCountry = storage.loadCountry();
-//     if (oldCountry) {
-//       const countries = store.getState().address.countries;
-//       const exist = countries.find((item) => item._id === oldCountry._id);
-//       if (exist) {
-//         if (exist.currency_code) {
-//           currencyFormatter.setCurrency(exist.currency_code);
-//         }
-//         store.dispatch(
-//           settingAction.changeFields({
-//             country: oldCountry,
-//           }),
-//         );
-//       } else {
-//         storage.saveCountry(null);
-//       }
-//     }
-//   }
-// });
 
 firebaseUtils.onMessage((payload) => {
   if (!payload) {
@@ -123,9 +58,6 @@ firebaseUtils.onMessage((payload) => {
 
   try {
     const state: RootState = store.getState();
-    if (state.user._id) {
-      store.dispatch(notificationAction.getMyNotification());
-    }
   } catch (err) {
     console.log('Get notification error');
   }
@@ -137,7 +69,7 @@ const App: React.FC = (props: any) => {
       <ConnectedRouter history={history}>
         <Switch>
           {routes.map((item) => {
-            const Layout = item.layout;
+            const Layout = item.layout as any;
             const Component = item.component;
             const renderPage = (props): JSX.Element => (
               <Layout>

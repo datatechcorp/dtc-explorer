@@ -58,7 +58,6 @@ class Screen extends React.Component<PropsFromRedux> {
                   transactionId,
                   fromAddress,
                   toAddress,
-                  assetName,
                   assetAmount,
                   timeStamp,
                 } = tx;

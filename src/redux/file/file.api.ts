@@ -1,13 +1,9 @@
-import { BaseResponse, commonApi } from '../common';
-import { UploadType } from './file.enterface';
+import { commonApi } from '../common';
 
-function updateFiles(
-  data,
-  type: UploadType,
-): Promise<BaseResponse<string[]> | null> {
-  const api = '/file/v2/upload/' + type;
-  return commonApi.fetchData<string[]>(api, 'post', data);
+function updateFile(data) {
+  const api = '/upload/';
+  return commonApi.flexFetchData<string>(api, 'post', data);
 }
 export const fileApi = {
-  updateFiles,
+  updateFile,
 };

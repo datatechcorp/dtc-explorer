@@ -1,14 +1,13 @@
 import { Col, Row, Tabs, Typography } from 'antd';
 import React from 'react';
 import { connect, ConnectedProps } from 'react-redux';
-import { RootState } from '../../redux';
 import { userAction } from '../../redux/user';
 import { Overview } from './Components/Overview';
 
 const { Title } = Typography;
 const { TabPane } = Tabs;
 
-const mapStateToProps = (state: RootState) => ({});
+const mapStateToProps = () => ({});
 const mapDispatchToProps = {
   changeFields: userAction.changeFields,
 };

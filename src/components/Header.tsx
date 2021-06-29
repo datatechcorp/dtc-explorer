@@ -10,13 +10,6 @@ import { routeName } from '../config/route-name';
 import { UserStatus } from '../models/user';
 import { RootState } from '../redux';
 import { authAction } from '../redux/auth';
-import { cartAction } from '../redux/cart';
-import { categoryAction } from '../redux/category';
-import {
-  Notification,
-  notificationAction,
-  NotificationType,
-} from '../redux/notification';
 import { settingAction } from '../redux/setting';
 import { UserState } from '../redux/user';
 import { CopyableText } from '../components';
@@ -113,25 +106,14 @@ interface UserWalletPropsTypes {
   energy: number;
 }
 
-const mapStateToProps = (state: RootState): any => ({
+const mapStateToProps = (state: RootState) => ({
   auth: state.auth,
   user: state.user,
   showSidebar: state.setting.showSidebar,
-  cart: state.cart,
-  notifications: state.notifications,
-  customerBanner: state.setting.config.customerBanner,
-  selectedCountry: state.setting.country,
-  countries: state.address.countries,
-  category: state.category,
 });
 const mapDispatchToProps = {
   disconnect: authAction.disconnect,
   changeSettingFields: settingAction.changeFields,
-  getCart: cartAction.getCart,
-  getMyNotification: notificationAction.getMyNotification,
-  markReadNotification: notificationAction.markReadNotification,
-  goToPage: push,
-  getCategories: categoryAction.getCategories,
 };
 const connector = connect(mapStateToProps, mapDispatchToProps);
 type ReduxProps = ConnectedProps<typeof connector>;
@@ -193,6 +175,7 @@ const UserMenu: React.FC<UserMenuPropsTypes> = (props: UserMenuPropsTypes) => (
     </Menu>
   </CustomMenu>
 );
+
 class Component extends React.Component<ReduxProps, any> {
   constructor(props) {
     super(props);
@@ -235,9 +218,6 @@ class Component extends React.Component<ReduxProps, any> {
       currentPath: props.location.pathname,
     };
   };
-  onMarkRead = (id: string): void => {
-    this.props.markReadNotification(id);
-  };
 
   toggleCollapsed = (): void => {
     this.props.changeSettingFields({
@@ -245,21 +225,6 @@ class Component extends React.Component<ReduxProps, any> {
     });
   };
 
-  clickNotification = (item: Notification): void => {
-    if (!item.had_read) {
-      this.onMarkRead(item._id);
-    }
-    if (
-      item.type === NotificationType.ChangeOrderStatus ||
-      item.type === NotificationType.NewOrder
-    ) {
-      if (item.is_enterprise_notification) {
-        this.props.goToPage(routeName.enterprise.order + '?code=' + item.data);
-      } else {
-        this.props.goToPage(routeName.orderDetail + '?code=' + item.data);
-      }
-    }
-  };
   render(): JSX.Element {
     const user: UserState = this.props.user;
     let loginView;
@@ -283,7 +248,9 @@ class Component extends React.Component<ReduxProps, any> {
                 description={`${user.info.first_name || ''} ${
                   user.info.last_name || ''
                 }`}
-                logout={(): void => this.props.logout()}
+                logout={() => {
+                  return null;
+                }}
               />
             }
             placement="bottomRight"
@@ -384,4 +351,4 @@ class Component extends React.Component<ReduxProps, any> {
   }
 }
 
-export const Header = withRouter(connector(Component));
+export const Header = withRouter(connector(Component) as any);

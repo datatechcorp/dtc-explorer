@@ -1,23 +1,8 @@
-import {
-  Col,
-  Form,
-  Input,
-  Row,
-  Switch,
-  Select,
-  Checkbox,
-  List,
-  Typography,
-  Tooltip,
-  Tag,
-  Button,
-} from 'antd';
+import { Col, Form, Input, Row, Switch, Select, Checkbox, Button } from 'antd';
 import React from 'react';
 import { connect, ConnectedProps } from 'react-redux';
-import { VoteCard } from '../../components';
 import { CardToken } from '../../components/CardToken';
 import { RootState } from '../../redux';
-import { BsInfoCircleFill } from 'react-icons/bs';
 import { TokenType, txAction } from '../../redux/transaction';
 import { removeSpace } from '../../config/utils';
 import { setting } from '../../config/setting';
@@ -61,21 +46,20 @@ class Screen extends React.Component<PropsFromRedux, any> {
         title: 'Private Test Network',
       },
     ];
-    const transaction = [
-      {
-        title: 'Commission Fee',
-        description:
-          'Commission will be transferred directly to us through the Ethereum network as part of your payment. Commission will support ERC20 Token Generator to keep it safe, running and constantly updated.',
-        value: '0 ETH',
-      },
-      {
-        title: 'Gas Fee',
-        description: `It depends on Gas Limit and on current Gas price average. MetaMask will suggest both. Do not decrease Gas Limit to avoid transaction to fail. If you want, you can decrease Gas Price but your transaction could remain pending for minutes/hours. Read how to calculate right value in our FAQ. Failed transaction can't be refunded`,
-        value: '0 ETH',
-      },
-    ];
+    // const transaction = [
+    //   {
+    //     title: 'Commission Fee',
+    //     description:
+    //       'Commission will be transferred directly to us through the Ethereum network as part of your payment. Commission will support ERC20 Token Generator to keep it safe, running and constantly updated.',
+    //     value: '0 ETH',
+    //   },
+    //   {
+    //     title: 'Gas Fee',
+    //     description: `It depends on Gas Limit and on current Gas price average. MetaMask will suggest both. Do not decrease Gas Limit to avoid transaction to fail. If you want, you can decrease Gas Price but your transaction could remain pending for minutes/hours. Read how to calculate right value in our FAQ. Failed transaction can't be refunded`,
+    //     value: '0 ETH',
+    //   },
+    // ];
     const {
-      user: { asset },
       transaction: {
         issueTokenForm: {
           name,

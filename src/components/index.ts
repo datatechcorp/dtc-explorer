@@ -4,8 +4,6 @@ export * from './CopyableText';
 export * from './CustomCard';
 export * from './MyImageGallery';
 export * from './MobileHeader';
-export * from './WithdrawForm';
-export * from './DepositHistory';
 export * from './QRCodeText';
 export * from './SendModal';
 export * from './ReceiveModal';

@@ -1,12 +1,10 @@
 import { Icon } from 'antd';
 import React from 'react';
 import { connect, ConnectedProps } from 'react-redux';
-import { RootState } from '../../../redux';
-import utils from '../../../utils/utils';
 import trxLogo from '../../../assets/images/icons/bce.png';
 import { setting } from '../../../config/setting';
 
-const mapStateToProps = (state: RootState): any => ({});
+const mapStateToProps = (): any => ({});
 const mapDispatchToProps = {};
 
 const connector = connect(mapStateToProps, mapDispatchToProps);

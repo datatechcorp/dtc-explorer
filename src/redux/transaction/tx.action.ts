@@ -4,13 +4,16 @@ import { notification } from '../../utils/notification';
 import { GetTxsDto } from './dto';
 import { RootState } from '..';
 import { storage } from '../../utils/storage';
-import { TokenBase, Tx } from './tx.interface';
-import { removeSpace, sdk } from '../../config/utils';
+import { RecordContrRequest, TokenBase, Tx, RecordContr } from './tx.interface';
+import {
+  removeSpace,
+  sdk,
+  errorStack,
+  isErrResponse,
+} from '../../config/utils';
 import { userAction } from '../user';
-
 import abi from '../../static/solc_0.5.15_token_abi.json';
 import bytecode from '../../static/solc_0.5.15_token_bytecode.json';
-import { setting } from '../../config/setting';
 
 export const Types = {
   changeFields: 'app.tx.change-fields',
@@ -182,10 +185,88 @@ const issueToken = () => async (dispatch, getState: () => RootState) => {
   }
 };
 
+const recordToken = () => async (dispatch, getState: () => RootState) => {
+  const {
+    transaction: {
+      recordContrForm: {
+        contrType,
+        contrAddress,
+        tknDescriptions,
+        tknLogo,
+        oflWebsite,
+        email,
+        github,
+        whitepaper,
+        links,
+        signature,
+      },
+    },
+  } = getState();
+  const { pushError, hasErrors } = errorStack(
+    'recordContrForm',
+    dispatch,
+    changeFields,
+  );
+  if (!sdk.ins.isAddress(contrAddress)) {
+    pushError('contrAddress', 'Invalid contract address');
+  }
+  if (!tknDescriptions) {
+    pushError('tknDescriptions', 'Required field');
+  }
+  if (!tknLogo) {
+    pushError('tknLogo', 'Required field');
+  }
+  if (!oflWebsite) {
+    pushError('oflWebsite', 'Required field');
+  }
+  if (!email) {
+    pushError('email', 'Required field');
+  }
+  if (hasErrors()) {
+    return false;
+  }
+  dispatch(changeFields({ fetching: true }));
+
+  const params: RecordContrRequest = {
+    contrType,
+    contrAddress,
+    tknDescriptions,
+    tknLogo,
+    oflWebsite,
+    email,
+    signature,
+  };
+  if (github) {
+    params.github = github;
+  }
+  if (whitepaper) {
+    params.whitepaper = whitepaper;
+  }
+  if (links.platforms.length > 0) {
+    params.links = links;
+  }
+  const response = await txApi.recordContr(params);
+
+  dispatch(changeFields({ fetching: false }));
+
+  if (response) {
+    if (isErrResponse(response)) {
+      notification.error(response.message);
+      return false;
+    } else {
+      dispatch(changeFields({ isDone: true }));
+      return true;
+    }
+  }
+  notification.error('Please check your network');
+  return false;
+};
+
 export const txAction = {
   changeFields,
   getTxs,
   getMyTxs,
   insertTx,
   issueToken,
+  recordToken,
 };

@@ -13,26 +13,26 @@ import { Address } from '../../models/address';
 
 function getMyInfo(): Promise<BaseResponse<UserInfo> | null> {
   const api = '/user/me';
-  return commonApi.fetchData<UserInfo>(api);
+  return commonApi.fetchData<BaseResponse<UserInfo>>(api);
 }
 
 function updateUserInfo(
   data: ChangeUserInfoDto,
 ): Promise<BaseResponse<UserInfo> | null> {
   const api = '/user/update';
-  return commonApi.fetchData<UserInfo>(api, 'post', data);
+  return commonApi.fetchData<BaseResponse<UserInfo>>(api, 'post', data);
 }
 
 function changePassword(
   data: ChangePasswordDto,
 ): Promise<BaseResponse<UserInfo> | null> {
   const api = '/user/change-password';
-  return commonApi.fetchData<UserInfo>(api, 'post', data);
+  return commonApi.fetchData<BaseResponse<UserInfo>>(api, 'post', data);
 }
 
 function getMyAddresses(): Promise<BaseResponse<Address[][]> | null> {
   const api = '/address/me';
-  return commonApi.fetchData<Address[][]>(api);
+  return commonApi.fetchData<BaseResponse<Address[][]>>(api);
 }
 
 function updateAddress(data: AddressDto): Promise<BaseResponse<any> | null> {
@@ -42,12 +42,12 @@ function updateAddress(data: AddressDto): Promise<BaseResponse<any> | null> {
 
 function getMyChildren(): Promise<BaseResponse<UserInfo[][]> | null> {
   const api = '/user/my-children';
-  return commonApi.fetchData<UserInfo[][]>(api);
+  return commonApi.fetchData<BaseResponse<UserInfo[][]>>(api);
 }
 
 function getTwoFaUri(): Promise<BaseResponse<string> | null> {
   const api = '/user/get-2fa-uri';
-  return commonApi.fetchData<string>(api);
+  return commonApi.fetchData<BaseResponse<string>>(api);
 }
 
 function setupTwoFa(
@@ -59,14 +59,14 @@ function setupTwoFa(
 
 function updateKyc(data: UpdateKycDto): Promise<BaseResponse<UserInfo> | null> {
   const api = '/user/update-kyc';
-  return commonApi.fetchData<UserInfo>(api, 'post', data);
+  return commonApi.fetchData<BaseResponse<UserInfo>>(api, 'post', data);
 }
 
 function updateEnterprise(
   data: UpdateEnterpriseDto,
 ): Promise<BaseResponse<UserInfo> | null> {
   const api = '/user/update-enterprise';
-  return commonApi.fetchData<UserInfo>(api, 'post', data);
+  return commonApi.fetchData<BaseResponse<UserInfo>>(api, 'post', data);
 }
 
 function addOrUpdateDevice(
@@ -78,7 +78,7 @@ function addOrUpdateDevice(
 
 function getLatestUsers(limit): Promise<BaseResponse<UserInfo[]> | null> {
   const api = '/user/public' + commonApi.formatQuery({ limit });
-  return commonApi.fetchData<UserInfo[]>(api);
+  return commonApi.fetchData<BaseResponse<UserInfo[]>>(api);
 }
 export const userApi = {
   getMyInfo,

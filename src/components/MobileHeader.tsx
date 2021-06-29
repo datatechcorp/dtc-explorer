@@ -1,6 +1,5 @@
-import { Col, Divider, Drawer, Menu, Modal, Row, Select } from 'antd';
+import { Col, Divider, Drawer, Menu, Modal, Row } from 'antd';
 import { push } from 'connected-react-router';
-import { hasFlag } from 'country-flag-icons';
 import React from 'react';
 import { AiFillDashboard } from 'react-icons/ai';
 import { BiSearchAlt } from 'react-icons/bi';
@@ -14,18 +13,12 @@ import logo from '../assets/images/logo/bce-logo.png';
 import { CopyableText } from '../components';
 import { routeName } from '../config/route-name';
 import { setting } from '../config/setting';
-import { Banner } from '../models/banner';
 import { UserStatus } from '../models/user';
 import { RootState } from '../redux';
 import { authAction } from '../redux/auth';
-import { cartAction } from '../redux/cart';
-import { notificationAction } from '../redux/notification';
 import { settingAction } from '../redux/setting';
 import { UserState } from '../redux/user';
-import { CustomSearch } from './CustomSearch';
 import { MenuList } from './MenuList';
-
-const { Option } = Select;
 
 const CustomMenu = styled.div`
   width: auto;
@@ -128,21 +121,13 @@ const UserMenu: React.FC<UserMenuPropsTypes> = (props: UserMenuPropsTypes) => (
     </Menu>
   </CustomMenu>
 );
-const mapStateToProps = (state: RootState): any => ({
+const mapStateToProps = (state: RootState) => ({
   user: state.user,
   showSidebar: state.setting.showSidebar,
-  cart: state.cart,
-  notifications: state.notifications,
-  customerBanner: state.setting.config.customerBanner,
-  selectedCountry: state.setting.country,
-  countries: state.address.countries,
 });
 const mapDispatchToProps = {
   logout: authAction.logout,
   changeSettingFields: settingAction.changeFields,
-  getCart: cartAction.getCart,
-  getMyNotification: notificationAction.getMyNotification,
-  markReadNotification: notificationAction.markReadNotification,
   goToPage: push,
 };
 const connector = connect(mapStateToProps, mapDispatchToProps);
@@ -212,9 +197,6 @@ class Component extends React.Component<ReduxProps, any> {
       showing: props.location.pathname === routeName.home ? 'none' : 'block',
       currentPath: props.location.pathname,
     };
-  };
-  onMarkRead = (id: string): void => {
-    this.props.markReadNotification(id);
   };
 
   toggleCollapsed = (): void => {
@@ -336,15 +318,6 @@ class Component extends React.Component<ReduxProps, any> {
             </Col>
           </Row>
         </div>
-        {/* modal search */}
-        <Modal
-          footer={null}
-          className="search-modal"
-          visible={this.state.visibleSearch}
-          onCancel={this.cancelSearch}
-        >
-          <CustomSearch />
-        </Modal>
         {/* drawer sidebar */}
         <Drawer
           placement={this.state.placement}
@@ -368,4 +341,4 @@ class Component extends React.Component<ReduxProps, any> {
   }
 }
 
-export const MobileHeader = connector(withRouter(Component));
+export const MobileHeader = withRouter(connector(Component) as any);

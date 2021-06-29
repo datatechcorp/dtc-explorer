@@ -471,43 +471,6 @@ const resetPassword =
     return true;
   };
 
-const getSponsor =
-  (username: string) =>
-  async (dispatch): Promise<boolean> => {
-    const response = await commonApi.getUserInfo(username);
-    if (!response) {
-      notification.error('Please check your network');
-      return false;
-    }
-
-    dispatch(
-      changeFields({
-        'authForm.invitation_codeError': null,
-        'authForm.isFetchingInvitationInfo': true,
-        'authForm.invitationInfo': null,
-      }),
-    );
-    if (response.code == 200 && response.data !== null) {
-      dispatch(
-        changeFields({
-          'authForm.invitation_codeError': null,
-          'authForm.isFetchingInvitationInfo': false,
-          'authForm.invitationInfo': response.data,
-          'authForm.invitation_code': response.data.username,
-        }),
-      );
-    } else {
-      dispatch(
-        changeFields({
-          'authForm.invitation_codeError': 'Sponsor not found',
-          'authForm.isFetchingInvitationInfo': false,
-          'authForm.invitationInfo': null,
-        }),
-      );
-    }
-    return true;
-  };
-
 const loginFromAdmin =
   (userId: string, adminAccessToken: string): Function =>
   async (dispatch: Function): Promise<boolean> => {
@@ -666,6 +629,8 @@ const disconnect =
   () =>
   (dispatch): void => {
     storage.saveConnectKey(null);
+    storage.saveDrc20Token(null);
+    storage.saveTxs(null);
   };
 
 export const authAction = {
@@ -676,7 +641,6 @@ export const authAction = {
   verifyAccount,
   sendForgotPasswordEmail,
   resetPassword,
-  getSponsor,
   registerUser,
   loginFromAdmin,
   connect,

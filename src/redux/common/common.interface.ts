@@ -14,3 +14,7 @@ export interface BaseResponse<T> {
   debugErrors?: any;
   message: string;
 }
+
+export type ErrorResponse = { code: number; message: string };
+
+export type FlexResponse<T> = T | ErrorResponse;

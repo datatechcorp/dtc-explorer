@@ -5,36 +5,19 @@ import { connect, ConnectedProps } from 'react-redux';
 import { RouteComponentProps } from 'react-router';
 import { Link, withRouter } from 'react-router-dom';
 import logo from '../assets/images/logo/tron-logo.png';
-// import enterprise from '../assets/images/myAladin.jpg';
 import { Header as CustomHeader, MobileHeader } from '../components';
-import { CustomSearch } from '../components/CustomSearch';
-import { routeName } from '../config/route-name';
-import { setting } from '../config/setting';
 import { UserInfo } from '../models/user';
 import { RootState } from '../redux';
-import { categoryAction } from '../redux/category';
-import { partnerAction } from '../redux/partner';
-import { CustomerBannerState, settingAction } from '../redux/setting';
+import { settingAction } from '../redux/setting';
 import { storage } from '../utils/storage';
 
-const { Content, Header, Footer, Sider } = Layout;
-const { SubMenu } = Menu;
-const { Option } = Select;
-const { Title } = Typography;
-const { Meta } = Card;
+const { Content, Header } = Layout;
 
-const mapStateToProps = (state: RootState): any => ({
+const mapStateToProps = (state: RootState) => ({
   showSidebar: state.setting.showSidebar,
-  countries: state.address.countries,
-  selectedCountry: state.setting.country,
-  category: state.category,
-  banner: state.setting.config.customerBanner,
-  partner: state.partner,
 });
 const mapDispatchToProps = {
   changeSettingFields: settingAction.changeFields,
-  getCategories: categoryAction.getCategories,
-  getPartners: partnerAction.getPartners,
 };
 
 const connector = connect(mapStateToProps, mapDispatchToProps);
@@ -73,20 +56,6 @@ class Screen extends React.Component<PropsTypeFromRedux, State> {
     });
   };
 
-  changeCountry = (countryId): void => {
-    console.log('Change country', countryId);
-    const country = this.props.countries.find((item) => item._id === countryId);
-    if (country) {
-      storage.saveCountry(country);
-      window.scrollTo({ top: 0, left: 0 });
-      setTimeout(() => {
-        window.location.reload();
-      }, 100);
-      // this.props.changeSettingFields({
-      //   country: country,
-      // });
-    }
-  };
   toggle = () => {
     this.setState({
       collapsed: !this.state.collapsed,
@@ -94,8 +63,6 @@ class Screen extends React.Component<PropsTypeFromRedux, State> {
   };
   render(): JSX.Element {
     const { width } = this.state;
-    const isMobile = width <= 500;
-    const banner: CustomerBannerState = this.props.banner;
 
     return (
       <Layout>
@@ -109,16 +76,7 @@ class Screen extends React.Component<PropsTypeFromRedux, State> {
           <MobileHeader />
         </Header>
         <Layout>
-          <Content className="layout-content">
-            <div className="container none-mobile">
-              <Row>
-                <Col span={24} className="text-center">
-                  <CustomSearch />
-                </Col>
-              </Row>
-            </div>
-            {this.props.children}
-          </Content>
+          <Content className="layout-content">{this.props.children}</Content>
         </Layout>
         {/* <Footer className="footer">
           <div className="container">

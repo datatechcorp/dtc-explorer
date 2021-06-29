@@ -9,7 +9,7 @@ import { LoadableButton } from '../../components';
 import { authAction } from '../../redux/auth';
 import stringParser from 'query-string';
 
-const mapStateToProps = (state: RootState): any => ({
+const mapStateToProps = (state: RootState) => ({
   auth: state.auth,
 });
 const mapDispatchToProps = {

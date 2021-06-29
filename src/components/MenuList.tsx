@@ -1,20 +1,12 @@
 import React from 'react';
 import { Menu } from 'antd';
 import { Link, withRouter } from 'react-router-dom';
-import { CategoryState, categoryAction } from '../redux/category';
 import { connect, ConnectedProps } from 'react-redux';
 import { routeName } from '../config/route-name';
 import { RouteComponentProps } from 'react-router';
 
-const { SubMenu } = Menu;
-
-const mapStateToProps = (state: any): { category: CategoryState } => ({
-  category: state.category,
-});
-const mapDispatchToProps = {
-  changeFields: categoryAction.changeFields,
-  getCategories: categoryAction.getCategories,
-};
+const mapStateToProps = () => ({});
+const mapDispatchToProps = {};
 
 interface State {
   current: string;
@@ -63,7 +55,6 @@ class MenuListClass extends React.Component<
     return null;
   }
   render(): JSX.Element {
-    const { category } = this.props;
     const { width } = this.state;
     const isMobile = width <= 500;
     return (

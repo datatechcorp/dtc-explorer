@@ -8,35 +8,28 @@ import { Link } from 'react-router-dom';
 import { RootState } from '../../redux';
 import { LoadableButton } from '../../components';
 import queryParser from 'query-string';
-import { addressAction } from '../../redux/address';
 import _ from 'lodash';
 
-const mapStateToProps = (state: RootState): any => ({
+const mapStateToProps = (state: RootState) => ({
   auth: state.auth,
-  address: state.address,
 });
 const mapDispatchToProps = {
   changeFields: authAction.changeFields,
   register: authAction.registerUser,
   goToPage: push,
-  getSponsor: authAction.getSponsor,
-  getCountries: addressAction.getCountries,
 };
 
 const connector = connect(mapStateToProps, mapDispatchToProps);
 type PropsFromRedux = ConnectedProps<typeof connector>;
 
 class Screen extends React.Component<PropsFromRedux, {}> {
-  getSponsor;
   refUser;
   constructor(props) {
     super(props);
-    this.getSponsor = _.debounce(this._getSponsor, 700);
 
     const query: any = queryParser.parse(props.history.location.search);
     if (query.user) {
       this.refUser = query.user;
-      this.getSponsor(query.user);
     }
     props.changeFields({
       'authForm.usernameError': null,
@@ -59,14 +52,13 @@ class Screen extends React.Component<PropsFromRedux, {}> {
   }
 
   handleSubmit = (e): void => {
-    e.preventDefault();
-
-    const { authForm } = this.props.auth;
-    const data = { ...authForm };
-    if (data.invitation_code === '') {
-      delete data.invitation_code;
-    }
-    this.props.register(data);
+    // e.preventDefault();
+    // const { authForm } = this.props.auth;
+    // const data = { ...authForm };
+    // if (data.invitation_code === '') {
+    //   delete data.invitation_code;
+    // }
+    // this.props.register(data);
   };
 
   changeField = (key: string, value: any): void => {
@@ -78,21 +70,6 @@ class Screen extends React.Component<PropsFromRedux, {}> {
 
   changeRefUser = (username: string): void => {
     this.changeField('invitation_code', username);
-    this.getSponsor(username);
-  };
-
-  _getSponsor = (username): void => {
-    this.props.getSponsor(username);
-  };
-
-  changeCountry = (name): void => {
-    const selected = this.props.address.countries.find(
-      (item) => item.name === name,
-    );
-    if (!selected) {
-      return;
-    }
-    this.changeField('country', selected);
   };
 
   render(): JSX.Element {
@@ -191,52 +168,6 @@ class Screen extends React.Component<PropsFromRedux, {}> {
                     type="text"
                     placeholder="Phone"
                   />
-                </Form.Item>
-              </Col>
-              <Col sm={24}>
-                <Form.Item
-                  className="mb-0"
-                  validateStatus={authForm.countryError ? 'error' : 'success'}
-                  help={authForm.countryError}
-                >
-                  <Select
-                    defaultValue={authForm.country.name}
-                    onChange={(country): void => this.changeCountry(country)}
-                  >
-                    <Select.Option disabled value="Country">
-                      Country
-                    </Select.Option>
-
-                    {this.props.address.countries.map((item) => (
-                      <Select.Option
-                        key={item.phone + item.name}
-                        value={item.name}
-                      >
-                        <Row align="middle">
-                          <div
-                            style={{
-                              width: '2.1em',
-                              height: '1.4em',
-                              display: 'inline-block',
-                              marginRight: '1em',
-                            }}
-                          >
-                            <img
-                              alt={item.name}
-                              style={{
-                                width: '100%',
-                                height: '100%',
-                                border: '1px solid gray',
-                              }}
-                              src={`https://catamphetamine.gitlab.io/country-flag-icons/3x2/${item.code}.svg`}
-                            />
-                          </div>
-
-                          {item.name}
-                        </Row>
-                      </Select.Option>
-                    ))}
-                  </Select>
                 </Form.Item>
               </Col>
               <Col sm={24}>

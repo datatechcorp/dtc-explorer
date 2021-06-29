@@ -1,19 +1,11 @@
-import { Col, DatePicker, Form, Icon, Input, Row, Select, Upload } from 'antd';
+import { Col, Row } from 'antd';
 import React from 'react';
-import { FaFacebook } from 'react-icons/fa';
 import { connect, ConnectedProps } from 'react-redux';
 import { RootState } from '../../../redux';
-import { fileApi } from '../../../redux/file';
-import { UploadType } from '../../../redux/file/file.enterface';
-import { CardToken } from '../../../components/CardToken';
-
-const { Option } = Select;
-const { TextArea } = Input;
 
 const mapStateToProps = (state: RootState): any => ({
   user: state.user,
   wallet: state.wallet,
-  setting: state.setting,
 });
 const mapDispatchToProps = {};
 

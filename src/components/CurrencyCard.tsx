@@ -5,7 +5,6 @@ import { setting } from '../config/setting';
 import { Asset, UserState } from '../redux/user';
 import { sdk } from '../config/utils';
 import { Drc10Token, Drc20Token } from '../redux/transaction';
-import { storage } from '../utils/storage';
 
 type PropsType = {
   title?: string;

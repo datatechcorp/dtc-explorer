@@ -4,11 +4,7 @@ import { RootState } from '../../../redux';
 import { Row, Col, Tooltip, Tag, Typography } from 'antd';
 import iconQuestion from '../../../assets/images/icons/question.svg';
 import { CopyableText } from '../../../components';
-import {
-  FaRegCheckCircle,
-  FaExclamationCircle,
-  FaExchangeAlt,
-} from 'react-icons/fa';
+import { FaRegCheckCircle, FaExchangeAlt } from 'react-icons/fa';
 import { BiTime } from 'react-icons/bi';
 import { Link } from 'react-router-dom';
 import { routeName } from '../../../config/route-name';
@@ -66,7 +62,6 @@ class Screen extends React.Component<PropsFromRedux> {
   render(): JSX.Element {
     const {
       user: { walletAddress },
-      tickTx: { data },
     } = this.props;
     // console.log('data :>> ', data);
     const demoData = [
