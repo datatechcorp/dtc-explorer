@@ -156,10 +156,29 @@ export interface RecordContrRequest
   signature: string;
 }
 
+export interface MongoPayload {
+  id: string;
+  createdAt: string;
+}
+
 export interface RecordContr
   extends RecordContrBase,
     RecordContrParams,
-    RecordContrOptional {
-  id: string;
-  createdAt: string;
+    RecordContrOptional,
+    MongoPayload {}
+
+export interface Drc20Payload {
+  tknName: string;
+  tknSymbol: string;
+  tknDecimals: number;
+  tknTotalSupply: string;
+}
+
+export interface ContrModel
+  extends RecordContrBase,
+    RecordContrParams,
+    Partial<RecordContrOptional>,
+    MongoPayload {
+  contrCreator: string;
+  tknIssuer: string;
 }

@@ -4,7 +4,6 @@ import { FaCopyright, FaFacebook, FaTelegram, FaYoutube } from 'react-icons/fa';
 import { connect, ConnectedProps } from 'react-redux';
 import { RouteComponentProps } from 'react-router';
 import { Link, withRouter } from 'react-router-dom';
-import logo from '../assets/images/logo/tron-logo.png';
 import { Header as CustomHeader, MobileHeader } from '../components';
 import { UserInfo } from '../models/user';
 import { RootState } from '../redux';

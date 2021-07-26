@@ -5,7 +5,7 @@ import React from 'react';
 import { connect, ConnectedProps } from 'react-redux';
 import { Link, withRouter } from 'react-router-dom';
 import styled from 'styled-components';
-import logo from '../assets/images/logo/bce-logo.png';
+import logo from '../assets/images/logo/full.png';
 import { routeName } from '../config/route-name';
 import { UserStatus } from '../models/user';
 import { RootState } from '../redux';

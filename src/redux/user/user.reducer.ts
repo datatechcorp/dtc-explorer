@@ -34,7 +34,5 @@ const rawUserReducer = (state: UserState, action: Action): UserState => {
   }
 };
 
-export const userReducer: (
-  state: UserState,
-  action: Action,
-) => UserState = produce(rawUserReducer, userInitialState);
+export const userReducer: (state: UserState, action: Action) => UserState =
+  produce(rawUserReducer, userInitialState);

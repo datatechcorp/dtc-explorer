@@ -1,6 +1,6 @@
 import React from 'react';
 import { Row, Col, Layout, Card } from 'antd';
-import logo from '../assets/images/logo/bce-logo.png';
+import logo from '../assets/images/logo/full.png';
 import { Link } from 'react-router-dom';
 import { routeName } from '../config/route-name';
 import bg from '../assets/images/bg/bg-auth.svg';

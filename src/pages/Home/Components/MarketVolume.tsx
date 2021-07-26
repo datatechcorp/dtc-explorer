@@ -1,7 +1,7 @@
 import { Icon } from 'antd';
 import React from 'react';
 import { connect, ConnectedProps } from 'react-redux';
-import trxLogo from '../../../assets/images/icons/bce.png';
+import trxLogo from '../../../assets/images/icons/logo.png';
 import { setting } from '../../../config/setting';
 
 const mapStateToProps = (): any => ({});

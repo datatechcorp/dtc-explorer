@@ -21,7 +21,7 @@ import { setting } from './config/setting';
 
 firebaseUtils.init();
 
-axios.defaults.baseURL = setting.eventHost;
+axios.defaults.baseURL = setting.eventHost + '/event';
 axios.defaults.headers.common['Access-Control-Allow-Origin'] = '*';
 axios.defaults.headers.common['crossdomain'] = true;
 

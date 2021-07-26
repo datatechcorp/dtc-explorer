@@ -11,7 +11,7 @@ import {
   VoteCard,
 } from '../../components';
 import { WalletHistory } from '../../components/WalletHistory';
-import iconTrx from '../../assets/images/icons/bce.png';
+import iconTrx from '../../assets/images/icons/logo.png';
 import { setting } from '../../config/setting';
 import { userAction } from '../../redux/user';
 

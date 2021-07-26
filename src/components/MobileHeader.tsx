@@ -9,7 +9,7 @@ import { IoIosClose } from 'react-icons/io';
 import { connect, ConnectedProps } from 'react-redux';
 import { Link, withRouter } from 'react-router-dom';
 import styled from 'styled-components';
-import logo from '../assets/images/logo/bce-logo.png';
+import logo from '../assets/images/logo/full.png';
 import { CopyableText } from '../components';
 import { routeName } from '../config/route-name';
 import { setting } from '../config/setting';
